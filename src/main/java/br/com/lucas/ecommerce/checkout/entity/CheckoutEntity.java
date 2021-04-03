@@ -3,10 +3,8 @@ package br.com.lucas.ecommerce.checkout.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -14,10 +12,15 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class CheckoutEntity {
 
-    @javax.persistence.Id
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String code;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
+    public enum Status {
+        CREATED,
+        APPROVED
+    }
 }
